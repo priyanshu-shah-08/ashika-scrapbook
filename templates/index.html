@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#17121f">
+    <meta name="description" content="A little digital scrapbook celebrating Ashika and the moments that brought us together.">
+    <title>For Ashika — Our Digital Scrapbook</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="aurora-bg"></div>
+
+    <main class="scrapbook-shell" id="appShell">
+        <!-- 1. Cover Screen -->
+        <section class="screen cover-screen active" id="coverScreen">
+            <div class="cover-ornament" aria-hidden="true">
+                <span class="ornament-star star-one">✦</span>
+                <span class="ornament-heart">♥</span>
+                <span class="ornament-star star-two">✧</span>
+                <span class="ornament-orbit"></span>
+            </div>
+            <div class="cover-badge">A Belated Birthday Gift</div>
+            <h1 class="cover-title">For Ashika ✨</h1>
+            <p class="cover-subtitle">
+                From random strangers on a Reddit thread to late-night pep talks—here is a little look back at us.
+            </p>
+            <button class="primary-btn" id="startBtn">Open Scrapbook &rarr;</button>
+        </section>
+
+        <!-- 2. Main Interactive Chapter Reader -->
+        <section class="screen reader-screen" id="readerScreen">
+            <header class="reader-header">
+                <div class="progress-meta">
+                    <span id="chapterCounter" aria-live="polite">Chapter 1 of {{ total_chapters }}</span>
+                    <span class="platform-pill" id="platformBadge">Reddit</span>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-fill" id="progressFill" role="progressbar"
+                         aria-label="Scrapbook reading progress" aria-valuemin="0"
+                         aria-valuemax="{{ total_chapters }}" aria-valuenow="1"></div>
+                </div>
+                <h2 class="chapter-title" id="chapterTitle" aria-live="polite">Loading...</h2>
+            </header>
+
+            <div class="swipe-stage" id="swipeStage">
+                <div class="sticky-note hidden" id="authorNoteBox">
+                    <div class="sticky-pin">📌</div>
+                    <p id="authorNoteText"></p>
+                </div>
+
+                <div class="chat-feed" id="chatFeed">
+                    <!-- Bubbles injected dynamically via JS -->
+                </div>
+                <p class="tap-hint">Tap any bubble for a surprise • Swipe left/right to turn pages</p>
+            </div>
+
+            <footer class="reader-footer">
+                <button class="nav-btn" id="prevBtn" disabled>&larr; Prev</button>
+                <button class="nav-btn accent" id="nextBtn">Next &rarr;</button>
+            </footer>
+        </section>
+
+        <!-- 3. Belated Birthday Finale Screen -->
+        <section class="screen finale-screen" id="finaleScreen">
+            <div class="envelope-card" id="envelopeCard">
+                <button class="wax-seal" id="openLetterBtn" type="button" title="Tap to open"
+                        aria-label="Open your birthday note">💌</button>
+                <h2>One Last Thing...</h2>
+                <p>Tap the wax seal to open your birthday note.</p>
+            </div>
+
+            <div class="letter-modal hidden" id="letterModal">
+                <div class="letter-paper">
+                    <span class="letter-date">Happy Belated Birthday, Ashika 🎂</span>
+                    <h3>I'm so sorry I missed the day.</h3>
+                    <p>
+                        I felt terrible realizing I forgot your birthday, especially when you mean so much to me. You're genuinely one of the kindest, most resilient people I know—even on days when you doubt yourself.
+                    </p>
+                    <p>
+                        Thank you for being there since that random day on Reddit, for listening when things were rough, and for letting me cheer you on. No matter how overwhelming college or life gets, remember I'm always in your corner.
+                    </p>
+                    <p class="letter-signoff">Always cheering for you,<br><strong>Your Friend ✨</strong></p>
+                    <button class="nav-btn" id="restartBtn">Read Again ↺</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <canvas id="confettiCanvas"></canvas>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
